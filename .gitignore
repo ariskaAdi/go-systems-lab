@@ -1,0 +1,11 @@
+# binary hasil build
+*.exe
+/bin/
+
+# output eksperimen
+*.out
+*.prof
+*.trace
+output.txt
+error.txt
+error.log
