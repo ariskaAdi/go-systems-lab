@@ -8,9 +8,7 @@ import (
 	"strings"
 )
 
-// TODO: lihat README.md untuk spec dan acceptance criteria.
 func main() {
-
 	text, err := input(os.Args[1:], os.Stdin)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "byte-explorer:", err)
@@ -20,6 +18,8 @@ func main() {
 	printReport(os.Stdout, text)
 }
 
+// input memakai argumen jika ada, selain itu membaca seluruh stdin.
+// Newline dari stdin sengaja tidak dibuang: byte itu memang bagian dari input.
 func input(args []string, stdin io.Reader) (string, error) {
 	if len(args) > 0 {
 		return strings.Join(args, " "), nil
@@ -42,6 +42,7 @@ func printReport(w io.Writer, text string) {
 	}
 }
 
+// describe mengisi kolom char.
 func describe(r Row) string {
 	switch {
 	case r.Total == 0:
@@ -55,6 +56,7 @@ func describe(r Row) string {
 	}
 }
 
+// printable mengubah karakter kontrol seperti "\n" menjadi teks `\n` agar tabel tidak rusak.
 func printable(s string) string {
 	q := strconv.Quote(s)
 	return q[1 : len(q)-1]
